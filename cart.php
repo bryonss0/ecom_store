@@ -24,7 +24,7 @@
                         Welcome: Guest
                     </a>
                     <a href="#">
-                        Shopping Cart Total: $100, Total Items 2
+                        Shopping Cart Total: <?php total_price(); ?>, Total Items: <?php items(); ?>
                     </a>
                 </div><!---col-md-6 offer ends--->
                 <div class="col-md-6"><!---col-md-6 starts--->
@@ -92,7 +92,7 @@
                     </div><!---padding-nav ends--->
                     <a class="btn btn-primary navbar-btn right" href="cart.php"><!---btn btn-primary navbar-btn right starts--->
                         <i class="fa fa-shopping-cart"></i> 
-                        <span> 4 items in cart </span>
+                        <span> <?php items(); ?> items in cart </span>
                     </a><!---btn btn-primary navbar-btn right ends--->
                     <div class="navbar-collapse collapse right"><!---navbar-collapse collapse right start--->
                         <button class="btn navbar-btn btn-primary" type="button" data-toggle="collapse" data-target="#search">
@@ -129,7 +129,14 @@
                     <div class="box"><!--box-->
                         <form action="cart.php" method="post" enctype="multipart-form-data"><!--form -->
                             <h1>Shopping Cart</h1>
-                            <p class="text-muted">You currently have 3 item(s) in your cart.</p>
+                            <?php
+                            $ip_add = getRealUserIp();
+                            $select_cart = "select * from cart where ip_add='$ip_add'";
+                            $run_cart = mysqli_query($con, $select_cart);
+                            $count = mysqli_num_rows($run_cart);                           
+                            ?>
+                    
+                            <p class="text-muted">You currently have <?php echo $count; ?> item(s) in your cart.</p>
                             <div class="table-responsive"><!--table-responsive -->
                                 <table class="table"><!--table-->
                                     <thead>
@@ -143,80 +150,51 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php
+                                            $total =0;
+                                            while($row_cart = mysqli_fetch_array($run_cart)){  
+                                                $pro_id = $row_cart['p_id'];
+                                                $pro_size = $row_cart['size'];
+                                                $pro_qty = $row_cart['qty'];
+                                                $get_products = "select * from products where product_id='$pro_id'";
+                                                $run_products = mysqli_query($con, $get_products);
+                                                while($row_products = mysqli_fetch_array($run_products)){  
+                                                    $product_title = $row_products['product_title'];
+                                                    $product_img1 = $row_products['product_img1'];
+                                                    $only_price = $row_products['product_price'];
+                                                    $sub_total = $row_products['product_price']*$pro_qty;
+                                                    $total += $sub_total;
+                                        ?>                                     
                                         <tr>
                                             <td>
-                                                <img src="admin_area/product_images/coverup.jpg">
+                                                <img src="admin_area/product_images/<?php echo $product_img1; ?>">
                                             </td>
                                             <td>
-                                                <a href="#">Cover-up for Swimsuit</a>
+                                                <a href="#"><?php echo $product_title; ?></a>
                                             </td>
                                             <td>
-                                                2
+                                                <?php echo $pro_qty; ?>
                                             </td>
                                             <td>
-                                               $29.99
+                                               $<?php echo $only_price; ?>
                                             </td>
                                             <td>
-                                                Large
+                                                <?php echo $pro_size; ?>
                                             </td>
                                             <td>
-                                                <input type="checkbox" name="remove[]">                                               
+                                                <input type="checkbox" name="remove[]" value="<?php echo $pro_id; ?>">                                               
                                             </td>
                                             <td>
-                                                $59.98
+                                                $<?php echo $sub_total; ?>
                                             </td>
-                                        </tr>
-                                                                                <tr>
-                                            <td>
-                                                <img src="admin_area/product_images/coverup.jpg">
-                                            </td>
-                                            <td>
-                                                <a href="#">Cover-up for Swimsuit</a>
-                                            </td>
-                                            <td>
-                                                2
-                                            </td>
-                                            <td>
-                                               $29.99
-                                            </td>
-                                            <td>
-                                                Large
-                                            </td>
-                                            <td>
-                                                <input type="checkbox" name="remove[]">                                               
-                                            </td>
-                                            <td>
-                                                $59.98
-                                            </td>
-                                        </tr>
-                                                                                <tr>
-                                            <td>
-                                                <img src="admin_area/product_images/coverup.jpg">
-                                            </td>
-                                            <td>
-                                                <a href="#">Cover-up for Swimsuit</a>
-                                            </td>
-                                            <td>
-                                                2
-                                            </td>
-                                            <td>
-                                               $29.99
-                                            </td>
-                                            <td>
-                                                Large
-                                            </td>
-                                            <td>
-                                                <input type="checkbox" name="remove[]">                                               
-                                            </td>
-                                            <td>
-                                                $59.98
-                                            </td>
-                                        </tr>
+                                        </tr><!-- tr ends -->
+                                        <?php } } ?>
+                                        
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th colspan="5">Total</th>
-                                            <th colspan="2">$100</th>
+                                            <th colspan="2">$<?php echo $total; ?></th>
                                         </tr>
                                     </tfoot>
                                 </table><!--table-->
