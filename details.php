@@ -1,4 +1,3 @@
-
 <?php
     include("includes/db.php");
     include("functions/functions.php");
@@ -196,6 +195,7 @@ Alphabry LLC
                         <div class="col-sm-6"><!--coll-sm-6 starts -->
                             <div class="box"><!-- box -->
                                 <h1 class="text-center"> <?php echo $pro_title; ?> </h1>
+                                <?php add_cart(); ?>
                                 <form action="index.php?add_cart=<?php echo $product_id; ?>" method="post" class="form-horizontal"><!-- form-horizontal -->
                                     <div class="form-group"><!-- form-group -->
                                         <label class="col-md-5 control-label">Product Quantity</label>

@@ -1,3 +1,8 @@
+// Created by Mohammad Tahir Ahmed;  website computerfever.com
+// Udemy course: https://www.udemy.com/course/modern-e-commerce-store-in-php-mysqli-with-bootstrap
+// modified by Bryon Severns
+
+
 <?php
     include("includes/db.php");
     include("functions/functions.php");
