@@ -43,6 +43,27 @@ function items(){
     echo $count_items;
 }// items function ends
 
+// total_price function starts
+function total_price(){
+        global $db;
+    $ip_add = getRealUserIp();
+    $total = 0;
+    $select_cart = "select * from cart where ip_add='$ip_add'";
+    $run_cart = mysqli_query($db, $select_cart);
+    while ($record = mysqli_fetch_array($run_cart)) {
+        $pro_id = $record['p_id'];
+        $pro_qty = $record['qty'];
+        $get_price = "select * from products where product_id='$pro_id'";
+        $run_price = mysqli_query($db, $get_price);
+        while($row_price= mysqli_fetch_array($run_price)){
+            $sub_total = $row_price['product_price']*$pro_qty;
+            $total +=$sub_total;
+        }      
+    }
+    echo "$". $total;
+}// total_price function ends
+
+
 
 function getPro(){
     global $db;
