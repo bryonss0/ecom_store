@@ -121,13 +121,13 @@
                 <div class="col-md-12"><!-- col-md-12 starts -->
                     <ul class="breadcrumb"><!-- breadcrumb starts -->
                         <li><a href="index.php">Home</a></li>
-                        <li><a href="cart.php">Cart</a></li>
+                        <li>Cart</li>
                     </ul><!-- breadcrumb ends -->
                 </div><!-- col-md-12 ends -->
                 
-                <div class="col-md-9" id="cart"><!-- col-md-9 -->
-                    <div class="box"><!--box-->
-                        <form action="cart.php" method="post" enctype="multipart-form-data"><!--form -->
+                <div class="col-md-9" id="cart"><!-- col-md-9 id="cart"-->
+                    <div class="box"><!--box starts-->
+                        <form action="cart.php" method="post" enctype="multipart-form-data"><!--form action starts-->
                             <h1>Shopping Cart</h1>
                             <?php
                             $ip_add = getRealUserIp();
@@ -211,14 +211,28 @@
                                     </button>
                                     <a href="checkout.php" class="btn btn-primary">
                                         Proceed to checkout<i class="fa fa-chevron-right"></i>
-                                    </a>
-                                    
-                                </div><!--pull-right-->
-                            </div><!--box-footer-->
-                        </form><!--form -->
-                    </div><!--box-->
-                    
-                </div><!-- col-md-9 -->
+                                    </a>                                   
+                                </div><!--pull-right ends-->
+                            </div><!--box-footer ends-->
+                        </form><!--form  ends-->
+                    </div><!--box ends-->  
+                    <?php  
+                        function update_cart(){
+                            global $con;
+                            if(isset($_POST['update'])){
+                                foreach($_POST['remove'] as $remove_id){
+                                    $delete_product = "delete from cart where p_id='$remove_id'";
+                                    $run_delete = mysqli_query($con, $delete_product);
+                                    if($run_delete){
+                                        echo "<script>window.open('cart.php','_self')</script>";
+                                    }
+                                }
+                            }
+                        }
+                        echo @$up_cart = update_cart();
+                    ?>
+                </div><!-- col-md-9 id="cart" ends-->
+                           
                 <div class="col-md-3"><!--col-md-3-->
                     <div class="box" id="order-summary"><!-- box id=order-summary  -->
                         <div class="box-header"><!-- box-header-->
@@ -250,10 +264,42 @@
                             </table>
                         </div><!--table-responsive-->
                     </div><!-- box id=order-summary  -->
-                </div><!--col-md-3-->
+                </div><!--col-md-3 ends-->  
+                <div class="col-md-9"><!-- col-md-9 starts -->
+                        <div id="row same-height-row"><!--row same-height-row -->
+                            <div class="col-md-3 col-sm-6"><!-- col-md-3 col-sm-6 -->
+                                <div class="box same-height headline"><!--box same-height -->
+                                    <h3 class="text-center">You may also like these products</h3> 
+                                </div><!--box same-height headline ends-->
+                            </div><!-- col-md-3 col-sm-6 ends-->
+                            <?php
+                            $get_products = "select * from products order by rand() LIMIT 0,3";
+                            $run_products = mysqli_query($con,$get_products);
+                            while($row_products = mysqli_fetch_array($run_products)){
+                                $pro_id    = $row_products['product_id'];
+                                $pro_title = $row_products['product_title'];
+                                $pro_price = $row_products['product_price'];
+                                $pro_img1  = $row_products['product_img1'];
+                                echo "
+                                    <div class='center-responsive col-md-3 col-sm-6'>
+                                    <div class='product same-height'>
+                                    <a href='details.php?pro_id=$pro_id'>
+                                    <img src='admin_area/product_images/$pro_img1' class='img-responsive'>
+                                    </a>
+                                    <div class='text'>
+                                    <h3><a href='details.php?pro_id=$pro_id'>$pro_title</a></h3>
+                                        <p class='price'>$$pro_price</p>
+                                    </div>
+                                    </div>
+                                    </div>
+                                ";
+                            }
+                            ?>
+                            
+                        </div><!--row same-height-row -->
+                </div class="col-md-9"><!-- col-md-9 ends -->
                 
-                
-            </div><!-- container ends -->
+            </div><!-- container ends -->           
         </div><!-- content ends -->       
 
         <?php include("includes/footer.php"); ?>        
