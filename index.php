@@ -1,5 +1,6 @@
 
 <?php
+    session_start();
     include("includes/db.php");
     include("functions/functions.php");
 ?>
@@ -27,10 +28,16 @@
             <div class="container"><!---container starts--->
                 <div class="col-md-6 offer"><!---col-md-6 offer starts--->
                     <a href="#" class="btn btn-success btn-sm">
-                        Welcome: Guest
+                        <?php
+                        if(!isset($_SESSION['customer_email'])){
+                            echo "Welcome: Guest ";
+                        }else{
+                            echo "Welcome:  " . $_SESSION['customer_email'] . "";
+                        }          
+                        ?>
                     </a>
                     <a href="#">
-                        Shopping Cart Total: $100, Total Items 2
+                        Shopping Cart Total: <?php total_price(); ?>, Total Items: <?php items(); ?>
                     </a>
                 </div><!---col-md-6 offer ends--->
                 <div class="col-md-6"><!---col-md-6 starts--->
@@ -98,7 +105,7 @@
                     </div><!---padding-nav ends--->
                     <a class="btn btn-primary navbar-btn right" href="cart.php"><!---btn btn-primary navbar-btn right starts--->
                         <i class="fa fa-shopping-cart"></i> 
-                        <span> 4 items in cart </span>
+                        <span> <?php items(); ?> items in cart </span>
                     </a><!---btn btn-primary navbar-btn right ends--->
                     <div class="navbar-collapse collapse right"><!---navbar-collapse collapse right start--->
                         <button class="btn navbar-btn btn-primary" type="button" data-toggle="collapse" data-target="#search">
