@@ -1,4 +1,8 @@
 <?php
+    session_start();
+        if(!isset($_SESSION['customer_email'])){
+        echo "<script>window.open('../checkout.php','_self')</script>";
+    }else{ 
     include("includes/db.php");
     include("functions/functions.php");
 ?>
@@ -25,10 +29,16 @@ Alphabry LLC
             <div class="container"><!---container starts--->
                 <div class="col-md-6 offer"><!---col-md-6 offer starts--->
                     <a href="#" class="btn btn-success btn-sm">
-                        Welcome: Guest
+                        <?php
+                        if(!isset($_SESSION['customer_email'])){
+                            echo "Welcome: Guest ";
+                        }else{
+                            echo "Welcome:  " . $_SESSION['customer_email'] . "";
+                        }          
+                        ?>
                     </a>
                     <a href="#">
-                        Shopping Cart Total: $100, Total Items 2
+                        Shopping Cart Total: <?php total_price(); ?>, Total Items: <?php items(); ?>
                     </a>
                 </div><!---col-md-6 offer ends--->
                 <div class="col-md-6"><!---col-md-6 starts--->
@@ -39,9 +49,13 @@ Alphabry LLC
                             </a>
                         </li>
                         <li>
-                            <a href="my_account.php">
-                                My Account
-                            </a>
+                            <?php
+                         if(!isset($_SESSION['customer_email'])){
+                             echo "<a href='../checkout.php'>My Account</a>";
+                         }else{
+                             echo "<a href='my_account.php?my_orders'>My Account</a>";
+                         }
+                         ?>
                         </li>
                         <li>
                             <a href="../cart.php">
@@ -49,9 +63,13 @@ Alphabry LLC
                             </a>
                         </li>
                         <li>
-                            <a href="../checkout.php">
-                                Login
-                            </a>
+                          <?php 
+                          if(!isset($_SESSION['customer_email'])){
+                              echo "<a href='../checkout.php'>Login</a>";
+                          }else{
+                              echo "<a href='logout.php'>Logout</a>";
+                          }
+                          ?>
                         </li>
                     </ul><!---menu ends--->                 
                 </div><!---col-md-6 ends--->
@@ -84,7 +102,13 @@ Alphabry LLC
                                 <a href="../shop.php">Shop</a>
                             </li>
                             <li class="active">
-                                <a href="my_account.php">My Account</a>
+                                <?php
+                         if(!isset($_SESSION['customer_email'])){
+                             echo "<a href='../checkout.php'>My Account</a>";
+                         }else{
+                             echo "<a href='my_account.php?my_orders'>My Account</a>";
+                         }
+                         ?>
                             </li>
                             <li>
                                 <a href="../cart.php">Shopping Cart</a>
@@ -96,7 +120,7 @@ Alphabry LLC
                     </div><!---padding-nav ends--->
                     <a class="btn btn-primary navbar-btn right" href="cart.php"><!---btn btn-primary navbar-btn right starts--->
                         <i class="fa fa-shopping-cart"></i> 
-                        <span> 4 items in cart </span>
+                        <span> <?php items(); ?> items in cart </span>
                     </a><!---btn btn-primary navbar-btn right ends--->
                     <div class="navbar-collapse collapse right"><!---navbar-collapse collapse right start--->
                         <button class="btn navbar-btn btn-primary" type="button" data-toggle="collapse" data-target="#search">
@@ -135,16 +159,16 @@ Alphabry LLC
                 <div class="col-md-9"><!--col-md-9-->
                     <div class="box"><!--box-->
                         <h1 align="center">Please Confirm Your Payment</h1>
-                        <form action="confirm.php" method="post"enctype="multipart/form-data"><!--form starts-->
+                        <form action="confirm.php?update_id=<?php echo $order_id; ?>" method="post" enctype="multipart/form-data"><!--form starts-->
                             <div class="form-group"><!--form-group-->
                                 <label>Invoice No:</label>
                                 <input type="text" class="form-control" name="invoice_no" required>
                             </div><!--form-group-->
                                                         <div class="form-group"><!--form-group-->
                                 <label>Account Sent:</label>
-                                <input type="text" class="form-control" name="ammount_sent" required>
+                                <input type="text" class="form-control" name="amount_sent" required>
                             </div><!--form-group-->
-                                                        <div class="form-group"><!--form-group-->
+                            <div class="form-group"><!--form-group-->
                                 <label>Select Payment Mode:</label>
                                 <select name="payment_mode" class="form-control">
                                     <option>Select Payment Mode</option>
@@ -172,6 +196,28 @@ Alphabry LLC
                                 </button>
                             </div><!--text-center-->
                         </form><!--form ends-->
+                        <?php
+                            if(isset($_POST['confirm_payment'])){
+                                $update_id = $_GET['update_id'];
+                                $invoice_no = $_POST['invoice_no'];
+                                $amount = $_POST['amount_sent'];
+                                $payment_mode = $_POST['payment_mode'];
+                                $ref_no = $_POST['ref_no'];
+                                $code = $_POST['code'];
+                                $payment_date = $_POST['date'];
+                                $complete = "Complete";
+                                $insert_payment = "insert into payments (invoice_no,amount,payment_mode,ref_no,code,payment_date) values ('$invoice_no','$amount','$payment_mode','$ref_no','$code','$payment_date')";
+                                $run_payment = mysqli_query($con,$insert_payment);
+                                $update_customer_order = "update customer_orders set order_status='$complete' where order_id='$update_id'";//maybe error:  where order_id='$update_id'
+                                $run_customer_order = mysqli_query($con,$update_customer_order);
+                                $update_pending_order = "update pending_orders set order_status='$complete' where order_id='$update_id'";//maybe error:    where order_id='$update_id'
+                                $run_pending_order = mysqli_query($con,$update_pending_order);
+                                if($run_pending_order){
+                                    echo "<script>alert('your payment has been recieved, order will be completed within 24 hours')</script>";
+                                    echo "<script>window.open('my_account.php?my_orders','_self')</script>";
+                                }
+                            }
+                        ?>
                     </div><!--box-->
                 </div><!--col-md-9-->
 
@@ -186,4 +232,5 @@ Alphabry LLC
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.js"></script>            
     </body>
-</html>           
+</html>   
+    <?php } ?>
