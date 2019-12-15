@@ -37,26 +37,26 @@
     </div> <!--col-lg-3 col-md-6 ends-->
     
         <div class="col-md-2"><!--col-lg-3 col-md-6 starts-->
-        <div class="panel panel-primary"><!--panel panel-primary starts-->
+        <div class="panel panel-green"><!--panel panel-green starts-->
             <div class="panel-heading"><!--panel-heading starts-->
                 <div class="row"><!--panel-heading row starts-->
                     <div class="col-xs-3"><!--col-xs-3 starts-->
-                        <i class="fa fa-tasks fa-5x"></i>
+                        <i class="fa fa-comments fa-5x"></i>
                     </div><!--col-xs-3 ends-->
                     <div class="col-xs-9 text-right"><!--col-xs-9-text-right starts-->
-                        <div class="huge"> 15 </div>
-                        <div>Products</div>
+                        <div class="huge"> 9 </div>
+                        <div>Customers</div>
                     </div><!--col-xs-9-text-right ends-->
                 </div><!--panel-heading row ends-->
             </div><!--panel-heading ends-->
-            <a href="index.php?view_products">
+            <a href="index.php?view_customers">
                 <div class="panel-footer"><!--panel-footer starts-->
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                     <div class="clearfix"></div>
                 </div><!--panel-footer ends-->               
             </a>
-        </div><!--panel panel-primary ends-->
+        </div><!--panel panel-green ends-->
     </div> <!--col-lg-3 col-md-6 ends-->
     
         <div class="col-md-2"><!--col-lg-3 col-md-6 starts-->
