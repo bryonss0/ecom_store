@@ -1,11 +1,12 @@
 
 <?php
+    session_start();
     include("includes/db.php");
     include("functions/functions.php");
 ?><!DOCTYPE html>
-<!---
-Bryon Severns
-Alphabry LLC
+<!--- Created by Mohammad Tahir Ahmed;  website computerfever.com
+ Udemy course: https://www.udemy.com/course/modern-e-commerce-store-in-php-mysqli-with-bootstrap
+ modified by Bryon Severns; Alphabry LLC
 --->
 <html>
     <head>
@@ -25,10 +26,16 @@ Alphabry LLC
             <div class="container"><!---container starts--->
                 <div class="col-md-6 offer"><!---col-md-6 offer starts--->
                     <a href="#" class="btn btn-success btn-sm">
-                        Welcome: Guest
+                        <?php
+                        if(!isset($_SESSION['customer_email'])){
+                            echo "Welcome: Guest ";
+                        }else{
+                            echo "Welcome:  " . $_SESSION['customer_email'] . "";
+                        }          
+                        ?>
                     </a>
                     <a href="#">
-                        Shopping Cart Total: $100, Total Items 2
+                        Shopping Cart Total: <?php total_price(); ?>, Total Items: <?php items(); ?>
                     </a>
                 </div><!---col-md-6 offer ends--->
                 <div class="col-md-6"><!---col-md-6 starts--->
@@ -39,9 +46,13 @@ Alphabry LLC
                             </a>
                         </li>
                         <li>
-                            <a href="checkout.php">
-                                My Account
-                            </a>
+                           <?php
+                         if(!isset($_SESSION['customer_email'])){
+                             echo "<a href='checkout.php'>My Account</a>";
+                         }else{
+                             echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
+                         }
+                         ?>
                         </li>
                         <li>
                             <a href="cart.php">
@@ -49,9 +60,13 @@ Alphabry LLC
                             </a>
                         </li>
                         <li>
-                            <a href="checkout.php">
-                                Login
-                            </a>
+                          <?php 
+                          if(!isset($_SESSION['customer_email'])){
+                              echo "<a href='checkout.php'>Login</a>";
+                          }else{
+                              echo "<a href='logout.php'>Logout</a>";
+                          }
+                          ?>
                         </li>
                     </ul><!---menu ends--->                 
                 </div><!---col-md-6 ends--->
@@ -84,7 +99,13 @@ Alphabry LLC
                                 <a href="shop.php">Shop</a>
                             </li>
                             <li>
-                                <a href="checkout.php">My Account</a>
+                                <?php
+                         if(!isset($_SESSION['customer_email'])){
+                             echo "<a href='checkout.php'>My Account</a>";
+                         }else{
+                             echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
+                         }
+                         ?>
                             </li>
                             <li>
                                 <a href="cart.php">Shopping Cart</a>
@@ -96,7 +117,7 @@ Alphabry LLC
                     </div><!---padding-nav ends--->
                     <a class="btn btn-primary navbar-btn right" href="cart.php"><!---btn btn-primary navbar-btn right starts--->
                         <i class="fa fa-shopping-cart"></i> 
-                        <span> 4 items in cart </span>
+                        <span> <?php items(); ?> items in cart </span>
                     </a><!---btn btn-primary navbar-btn right ends--->
                     <div class="navbar-collapse collapse right"><!---navbar-collapse collapse right start--->
                         <button class="btn navbar-btn btn-primary" type="button" data-toggle="collapse" data-target="#search">

@@ -8,8 +8,8 @@
 ?>
 <!DOCTYPE html>
 <!DOCTYPE html>
-<!--- Created by Mohammad Tahir Ahmed;  website computerfever.com
- Udemy course: https://www.udemy.com/course/modern-e-commerce-store-in-php-mysqli-with-bootstrap
+<!--- Created by Mohammad Tahir Ahmed; computerfever.com;
+ Udemy course: https://www.udemy.com/course/modern-e-commerce-store-in-php-mysqli-with-bootstrap ;
  modified by Bryon Severns; Alphabry LLC
 --->
 <html>

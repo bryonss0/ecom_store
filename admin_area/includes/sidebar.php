@@ -127,7 +127,32 @@
                         </a> 
                     </li>
                 
-            </li><!--li ends-->            
+            </li><!--li ends-->   
+            
+            <li><!--li starts-->
+                <a href="#" data-toggle="collapse" data-target="#users">
+                    <i class="fa fa-fw fa-gear"></i>Users
+                    <i class="fa fa-fw fa-caret-down"></i>
+                </a>
+                <ul id="users" class="collapse">
+                    <li>
+                        <a href="index.php?insert_user">Insert User</a>
+                    </li>
+                    <li>
+                        <a href="index.php?view_users">View Users</a>
+                    </li>
+                
+                    <li>
+                        <a href="index.php?user_profile">
+                            <i class="fa fa-fw fa-edit"></i>Edit Profile  </a>                       
+                    </li>
+                </ul>             
+            </li><!--li ends-->  
+            <li><!--li starts-->
+                <a href="logout.php">
+                    <i class="fa fa-fw fa-power-off"></i>Log Out
+                </a>
+            </li><!--li ends-->
         </ul><!--nav navbar-nav side-nav ends-->
     </div><!--collapse navbar-collapse navbar-ex1-collapse ends-->
     

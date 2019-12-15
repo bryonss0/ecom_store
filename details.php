@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include("includes/db.php");
     include("functions/functions.php");
 ?>
@@ -24,9 +25,9 @@ if(isset($_GET['pro_id'])){
 ?>
 
 <!DOCTYPE html>
-<!---
-Bryon Severns
-Alphabry LLC
+<!--- Created by Mohammad Tahir Ahmed;  website computerfever.com
+ Udemy course: https://www.udemy.com/course/modern-e-commerce-store-in-php-mysqli-with-bootstrap
+ modified by Bryon Severns; Alphabry LLC
 --->
 <html>
     <head>
@@ -46,10 +47,16 @@ Alphabry LLC
             <div class="container"><!---container starts--->
                 <div class="col-md-6 offer"><!---col-md-6 offer starts--->
                     <a href="#" class="btn btn-success btn-sm">
-                        Welcome: Guest
+                        <?php
+                        if(!isset($_SESSION['customer_email'])){
+                            echo "Welcome: Guest ";
+                        }else{
+                            echo "Welcome:  " . $_SESSION['customer_email'] . "";
+                        }          
+                        ?>
                     </a>
                     <a href="#">
-                        Shopping Cart Total: $100, Total Items 2
+                        Shopping Cart Total: <?php total_price(); ?>, Total Items: <?php items(); ?>
                     </a>
                 </div><!---col-md-6 offer ends--->
                 <div class="col-md-6"><!---col-md-6 starts--->
@@ -60,9 +67,13 @@ Alphabry LLC
                             </a>
                         </li>
                         <li>
-                            <a href="checkout.php">
-                                My Account
-                            </a>
+                            <?php
+                         if(!isset($_SESSION['customer_email'])){
+                             echo "<a href='checkout.php'>My Account</a>";
+                         }else{
+                             echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
+                         }
+                         ?>
                         </li>
                         <li>
                             <a href="cart.php">
@@ -70,9 +81,13 @@ Alphabry LLC
                             </a>
                         </li>
                         <li>
-                            <a href="checkout.php">
-                                Login
-                            </a>
+                          <?php 
+                          if(!isset($_SESSION['customer_email'])){
+                              echo "<a href='checkout.php'>Login</a>";
+                          }else{
+                              echo "<a href='logout.php'>Logout</a>";
+                          }
+                          ?>
                         </li>
                     </ul><!---menu ends--->                 
                 </div><!---col-md-6 ends--->
@@ -105,7 +120,13 @@ Alphabry LLC
                                 <a href="shop.php">Shop</a>
                             </li>
                             <li>
-                                <a href="checkout.php">My Account</a>
+                                <?php
+                         if(!isset($_SESSION['customer_email'])){
+                             echo "<a href='checkout.php'>My Account</a>";
+                         }else{
+                             echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
+                         }
+                         ?>
                             </li>
                             <li>
                                 <a href="cart.php">Shopping Cart</a>
@@ -117,7 +138,7 @@ Alphabry LLC
                     </div><!---padding-nav ends--->
                     <a class="btn btn-primary navbar-btn right" href="cart.php"><!---btn btn-primary navbar-btn right starts--->
                         <i class="fa fa-shopping-cart"></i> 
-                        <span> 4 items in cart </span>
+                        <span> <?php items(); ?> items in cart </span>
                     </a><!---btn btn-primary navbar-btn right ends--->
                     <div class="navbar-collapse collapse right"><!---navbar-collapse collapse right start--->
                         <button class="btn navbar-btn btn-primary" type="button" data-toggle="collapse" data-target="#search">
@@ -196,11 +217,12 @@ Alphabry LLC
                             <div class="box"><!-- box -->
                                 <h1 class="text-center"> <?php echo $pro_title; ?> </h1>
                                 <?php add_cart(); ?>
-                                <form action="index.php?add_cart=<?php echo $product_id; ?>" method="post" class="form-horizontal"><!-- form-horizontal -->
+                                <form action="details.php?add_cart=<?php echo $product_id; ?>" method="post" class="form-horizontal"><!-- form-horizontal starts-->
                                     <div class="form-group"><!-- form-group -->
                                         <label class="col-md-5 control-label">Product Quantity</label>
                                         <div class="col-md-7"><!-- col-md-7 -->
                                             <select name="product_qty" class="form-control">
+                                                <option>Select quantity</option>
                                                 <option>1</option>
                                                 <option>2</option>
                                                 <option>3</option>
@@ -213,7 +235,7 @@ Alphabry LLC
                                         <label class="col-md-5 control-label">Product Size</label>
                                         <div class="col-md-7"><!-- col-md-7 -->
                                             <select name="product_size" class="form-control">                                                
-                                                <option>select a size</option>
+                                                <option>select size</option>
                                                 <option>small</option>
                                                 <option>medium</option>
                                                 <option>large</option>
@@ -226,7 +248,7 @@ Alphabry LLC
                                             <i class="fa fa-shopping-cart"></i>Add to Cart
                                         </button>
                                     </p><!-- text-center buttons -->
-                                </form><!-- form-horizontal -->
+                                </form><!-- form-horizontal ends-->
                             </div><!-- box ends-->
                             <div class="row" id="thumbs"><!-- row id=thumbs-->
                                 <div class="col-xs-4"><!-- col-xs-4 -->
@@ -262,6 +284,8 @@ Alphabry LLC
                             </p><!-- p ends-->
                             <hr><!-- thematic break line  -->
                         </div><!-- box -->
+                        
+                        
                         <div id="row same-height-row"><!--row same-height-row -->
                             <div class="col-md-3 col-sm-6"><!-- col-md-3 col-sm-6 -->
                                 <div class="box same-height headline"><!--box same-height -->

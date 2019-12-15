@@ -2,6 +2,47 @@
 $host = "localhost:8889";
 $db = mysqli_connect($host,"root","root","ecom_store");
 
+//  IP address code starts
+function getRealUserIp(){
+    switch(true){
+        case (!empty($_SERVER['HTTP_X_REAL_IP'])) : return $_SERVER['HTTP_X_REAL_IP'];
+        case (!empty($_SERVER['HTTP_CLIENT_IP'])) : return $_SERVER['HTTP_CLIENT_IP'];
+        case (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) : return $_SERVER['HTTP_X_FORWARDED_FOR'];
+        default : return $_SERVER['REMOTE_ADDR'];
+    }
+}// IP address code ends 
+
+// items function starts
+function items(){
+    global $db;
+    $ip_add = getRealUserIp();
+    $get_items = "select * from cart where ip_add='$ip_add'";
+    $run_items = mysqli_query($db, $get_items);
+    $count_items = mysqli_num_rows($run_items);
+    echo $count_items;
+}// items function ends
+
+// total_price function starts
+function total_price(){
+    global $db;
+    $ip_add = getRealUserIp();
+    $total = 0;
+    $select_cart = "select * from cart where ip_add='$ip_add'";
+    $run_cart = mysqli_query($db, $select_cart);
+    while ($record = mysqli_fetch_array($run_cart)) {
+        $pro_id = $record['p_id'];
+        $pro_qty = $record['qty'];
+        $get_price = "select * from products where product_id='$pro_id'";
+        $run_price = mysqli_query($db, $get_price);
+        while($row_price= mysqli_fetch_array($run_price)){
+            $sub_total = $row_price['product_price']*$pro_qty;
+            $total +=$sub_total;
+        }      
+    }
+    echo "$". $total;
+}// total_price function ends
+
+// getPro function starts
 function getPro(){
     global $db;
     
@@ -33,9 +74,8 @@ function getPro(){
         </div><!--product ends-->
         </div><!--col-md-4 col-sm-6 single ends-->
         ";
-    }
-    
-}
+    }    
+}// getPro function ends
 
 
 

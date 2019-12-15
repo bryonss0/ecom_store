@@ -110,7 +110,7 @@
                             <li>
                                 <a href="cart.php">Shopping Cart</a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="contact.php">Contact Us</a>
                             </li>
                         </ul><!---nav navbar-nav navbar-left ends--->
@@ -146,68 +146,23 @@
                 <div class="col-md-12"><!-- col-md-12 starts -->
                     <ul class="breadcrumb"><!-- breadcrumb starts -->
                         <li><a href="index.php">Home</a></li>
-                        <li><a href="contact.php">Contact US</a></li>
+                        <li><a href="customer_register.php">Register</a></li>
                     </ul><!-- breadcrumb ends -->
                 </div><!-- col-md-12 ends --> 
                 
                 <div class="col-md-3"><!-- col-md-3 starts -->
                     <?php include("includes/sidebar.php"); ?>                    
                 </div><!-- col-md-3 ends -->
-                <div class="col-md-9"><!-- col-md-9-->
-                    <div class="box"><!-- box-->
-                        <div class="box-header"><!--box-header-->
-                            <center>
-                                <h2>Contact Us</h2>
-                                <p class="text-muted">
-                                    If you have any questions, please contact us. We love to help our customers.
-                                </p>
-                            </center>
-                        </div><!--box-header-->
-                        <form action="contact.php" method="post"><!--form-->
-                            <div class="form-group"><!--form-group-->
-                                <label>Name</label>
-                                <input type="text" class="form-control" name="name" required>                               
-                            </div><!--form-group-->
-                            <div class="form-group"><!--form-group-->
-                                <label>Email</label>
-                                <input type="text" class="form-control" name="email" required>                               
-                            </div><!--form-group-->
-                            <div class="form-group"><!--form-group-->
-                                <label>Subject</label>
-                                <input type="text" class="form-control" name="subject" required>                               
-                            </div><!--form-group-->
-                            <div class="form-group"><!--form-group-->
-                                <label>Message</label>
-                                <textarea class="form-control" name="message"></textarea>
-                            </div><!--form-group-->
-                            <div class="text-center"><!-- text-center-->
-                                <button type="submit" name="submit" class="btn btn-primary">
-                                    <i class="fa fa-user-md"></i>Send Message
-                                </button>
-                            </div><!-- text-center-->
-                        </form><!--form-->
-                        <?php  
-                            if(isset($_POST['submit'])){
-                                //  Admin receives email through this code
-                                $sender_name = $_POST['name'];
-                                $sender_email = $_POST['email'];
-                                $sender_subject = $_POST['subject'];
-                                $sender_message = $_POST['message'];
-                                $receiver_email = "bryon.severns@gmail.com";
-                                mail($receiver_email, $sender_name, $sender_email, $sender_subject, $sender_message);
-                                //  Automatic-response email to customer-sender 
-                                $email = $_POST['email'];
-                                $subject = "Welcome to my website";
-                                $msg = "Thanks for you email. I shall get back to you soon.";
-                                $from = "bryon.severns@gmail.com";
-                                mail($email, $subject, $msg, $from);
-                                echo "<h2 align='center'>Your message has been sent successfully.</h2>";
-                                
-                            }
-                        ?>
-                        
-                    </div><!-- box-->
-                </div><!-- col-md-9-->
+
+                <div class="col-md-9"><!--col-md-9 starts-->
+                    <?php
+                    if(!isset($_SESSION['customer_email'])){
+                        include("customer/customer_login.php");
+                    }else{
+                        include("payment_options.php");
+                    }
+                    ?>
+                </div><!--col-md-9 ends-->
 
                 
             </div><!-- container ends -->
@@ -218,4 +173,4 @@
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.js"></script>            
     </body>
-</html>                
+</html> 

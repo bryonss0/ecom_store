@@ -20,7 +20,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>       
         <link href="http://fonts.googleapis.com/css" rel="stylesheet">        
         <link href="styles/style.css" rel="stylesheet">
-        <link href="font-awesome/CSS/font-awesome.min.css" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/7181822bb7.js" crossorigin="anonymous"></script>
     </head>
     
     <body>
@@ -48,9 +48,13 @@
                             </a>
                         </li>
                         <li>
-                            <a href="checkout.php">
-                                My Account
-                            </a>
+                         <?php
+                         if(!isset($_SESSION['customer_email'])){
+                             echo "<a href='checkout.php'>My Account</a>";
+                         }else{
+                             echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
+                         }
+                         ?>
                         </li>
                         <li>
                             <a href="cart.php">
@@ -58,9 +62,13 @@
                             </a>
                         </li>
                         <li>
-                            <a href="checkout.php">
-                                Login
-                            </a>
+                          <?php 
+                          if(!isset($_SESSION['customer_email'])){
+                              echo "<a href='checkout.php'>Login</a>";
+                          }else{
+                              echo "<a href='logout.php'>Logout</a>";
+                          }
+                          ?>
                         </li>
                     </ul><!---menu ends--->                 
                 </div><!---col-md-6 ends--->
@@ -93,7 +101,13 @@
                                 <a href="shop.php">Shop</a>
                             </li>
                             <li>
-                                <a href="customer/my_account.php">My Account</a>
+                            <?php
+                                if(!isset($_SESSION['customer_email'])){
+                                    echo "<a href='checkout.php'>My Account</a>";
+                                }else{
+                                    echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
+                                }
+                            ?>
                             </li>
                             <li>
                                 <a href="cart.php">Shopping Cart</a>
