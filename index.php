@@ -6,9 +6,9 @@
 ?>
 
 <!DOCTYPE html>
-<!--- Created by Mohammad Tahir Ahmed;  website computerfever.com
+<!--- template created by Mohammad Tahir Ahmed;  website computerfever.com
  Udemy course: https://www.udemy.com/course/modern-e-commerce-store-in-php-mysqli-with-bootstrap
- modified by Bryon Severns; Alphabry LLC
+ modified by Bryon Severns, for Alphabry LLC
 --->
 <html>
     <head>
@@ -79,8 +79,8 @@
             <div class="container"><!---container starts--->
                 <div class="navbar-header"><!---navbar-header starts--->
                     <a class="navbar-brand home" href="index.php"><!---navbar-brand home starts--->
-                        <img src="images/wowdealslogo.png" alt="Wow Deals" class="hidden-xs">
-                        <img src="images/wowdealslogo.png" alt="Wow Deals" class="visible-xs">
+                        <img src="images/allnaturalmedlogo.png" alt="All Natural Medical" class="hidden-xs">
+                        <img src="images/allnaturalmedlogo.png" alt="All Natural Medical" class="visible-xs">
                     </a><!---navbar-brand home ends--->
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
                         <span class="sr-only">Toggle Navigation</span>
@@ -146,13 +146,6 @@
         <!-- image carousel  start-->     
         <div class="container">  
           <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            
-            <ol class="carousel-indicators"><!-- carousel Indicators start-->
-              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-              <li data-target="#myCarousel" data-slide-to="1"></li>
-              <li data-target="#myCarousel" data-slide-to="2"></li>
-              <li data-target="#myCarousel" data-slide-to="3"></li>
-            </ol><!-- carousel Indicators end-->
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner"><!--carousel-inner starts-->
@@ -170,7 +163,7 @@
                 }                
                 ?>
                 <?php
-                $get_slides = "select * from slider LIMIT 1,3 ";
+                $get_slides = "select * from slider LIMIT 1,13 ";
                 $run_slides = mysqli_query($con, $get_slides);
                 while($row_slides = mysqli_fetch_array($run_slides)){
                     $slide_name = $row_slides['slide_name'];
