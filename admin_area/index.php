@@ -15,6 +15,12 @@ $row_admin = mysqli_fetch_array($run_admin);
 
 $admin_id = $row_admin['admin_id'];
 $admin_name = $row_admin['admin_name'];
+$admin_email = $row_admin['admin_email'];
+$admin_image = $row_admin['admin_image'];
+$admin_country = $row_admin['admin_country'];
+$admin_job = $row_admin['admin_job'];
+$admin_phone = $row_admin['admin_phone'];
+$admin_about = $row_admin['admin_about'];
 
 $get_products = "select * from products";
 $run_products = mysqli_query($con, $get_products);
@@ -27,6 +33,10 @@ $count_customers = mysqli_num_rows($run_customers);
 $get_p_categories = "select * from product_categories";
 $run_p_categories = mysqli_query($con, $get_p_categories);
 $count_p_categories = mysqli_num_rows($run_p_categories);
+
+$get_pending_orders = "select * from pending_orders";
+$run_pending_orders = mysqli_query($con, $get_pending_orders);
+$count_pending_orders = mysqli_num_rows($run_pending_orders);
 
 ?>
 <!DOCTYPE html>
@@ -45,6 +55,12 @@ $count_p_categories = mysqli_num_rows($run_p_categories);
                     <?php
                     if(isset($_GET['dashboard'])){
                         include("dashboard.php");
+                    }
+                    if(isset($_GET['insert_product'])){
+                        include("insert_product.php");                       
+                    }
+                    if(isset($_GET['view_products'])){
+                        include("view_products.php");
                     }
                     ?>
                 </div><!--container-fluid ends-->
