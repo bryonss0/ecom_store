@@ -1,16 +1,13 @@
 <?php
-include("includes/db.php");
+if(!isset($_SESSION['admin_email'])){
+    echo "<script>window.open('login.php','_self')</script>";
+}else{
 ?>
 <!DOCTYPE html>
 <html>
     <head>
     <tiltle>Insert Products</tiltle>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">  
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>       
-    <link href="http://fonts.googleapis.com/css" rel="stylesheet">        
-    <link href="styles/style.css" rel="stylesheet">
-    <link href="font-awesome/CSS/font-awesome.min.css" rel="stylesheet">
+  
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script><!--for text editor in my webpage-->
     <script>tinymce.init({selector:'textarea'});</script><!--for text editor in my webpage-->
     </head>
@@ -151,10 +148,12 @@ if(isset($_POST['submit'])){
     
     if($run_product){
         echo "<script>alert('Product has been inserted')</script>";
-        echo "<script>window.open('insert_product.php','_self')</script>";
+        echo "<script>window.open('index.php?view_products','_self')</script>";
     }else{
         echo "<script>alert('Product NOT inserted')</script>";
     }
 }
 
 ?>
+
+<?php } ?>
