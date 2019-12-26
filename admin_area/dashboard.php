@@ -1,4 +1,9 @@
-
+<?php
+if(!isset($_SESSION['admin_email'])){
+    echo "<script>window.open('login.php','_self')</script>";
+}else{
+    
+?>
 <div class="row"><!--1 row starts-->
     <div class="col-md-2"></div><!--because offset-md-2 didn't work-->
     <div class="col-md-10"><!--col-md-10 starts-->
@@ -21,7 +26,7 @@
                         <i class="fa fa-tasks fa-5x"></i>
                     </div><!--col-xs-3 ends-->
                     <div class="col-xs-9 text-right"><!--col-xs-9-text-right starts-->
-                        <div class="huge"> 15 </div>
+                        <div class="huge"> <?php echo $count_products; ?> </div>
                         <div>Products</div>
                     </div><!--col-xs-9-text-right ends-->
                 </div><!--panel-heading row ends-->
@@ -44,7 +49,7 @@
                         <i class="fa fa-comments fa-5x"></i>
                     </div><!--col-xs-3 ends-->
                     <div class="col-xs-9 text-right"><!--col-xs-9-text-right starts-->
-                        <div class="huge"> 9 </div>
+                        <div class="huge"> <?php echo $count_customers; ?> </div>
                         <div>Customers</div>
                     </div><!--col-xs-9-text-right ends-->
                 </div><!--panel-heading row ends-->
@@ -67,7 +72,7 @@
                         <i class="fa fa-shopping-cart fa-5x"></i>
                     </div><!--col-xs-3 ends-->
                     <div class="col-xs-9 text-right"><!--col-xs-9-text-right starts-->
-                        <div class="huge"> 6 </div>
+                        <div class="huge"> <?php echo $count_p_categories; ?> </div>
                         <div>Products Categories</div>
                     </div><!--col-xs-9-text-right ends-->
                 </div><!--panel-heading row ends-->
@@ -90,7 +95,7 @@
                         <i class="fa fa-support fa-5x"></i>
                     </div><!--col-xs-3 ends-->
                     <div class="col-xs-9 text-right"><!--col-xs-9-text-right starts-->
-                        <div class="huge"> 4 </div>
+                        <div class="huge"> <?php echo $count_pending_orders; ?> </div>
                         <div>Orders</div>
                     </div><!--col-xs-9-text-right ends-->
                 </div><!--panel-heading row ends-->
@@ -130,42 +135,48 @@
                             </tr>
                         </thead><!--thead ends-->
                         <btody><!--tbody starts-->
+                            <?php 
+                            $i = 0;
+                            $get_order = "select * from pending_orders order by 1 DESC LIMIT 0,5";
+                            $run_order = mysqli_query($con, $get_order);
+                            
+                            while($row_order= mysqli_fetch_array($run_order)){
+                                $order_id = $row_order['order_id'];
+                                $c_id = $row_order['customer_id'];
+                                $invoice_no = $row_order['invoice_no'];
+                                $product_id = $row_order['product_id'];
+                                $qty = $row_order['qty'];
+                                $size = $row_order['size'];
+                                $order_status = $row_order['order_status'];
+                                $i++;
+                                
+                            ?>
                             <tr>
-                                <td>1</dt>
-                                <td>brock@gmail.com</dt>
-                                <td>78055</dt>
-                                <td>32</dt>
-                                <td>2</dt> 
-                                <td>Large</dt>
-                                <td>Complete</dt>    
+                                <td><?php echo "$i"; ?></dt>
+                                <td>
+                                    <?php
+                                        $get_customer = "select * from customers where customer_id='$c_id'";
+                                        $run_customer = mysqli_query($con, $get_customer);
+                                        $row_customer = mysqli_fetch_array($run_customer);
+                                        $customer_email = $row_customer['customer_email'];
+                                        echo $customer_email;
+                                    ?>
+                                </dt>
+                                <td><?php echo "$invoice_no"; ?></dt>
+                                <td><?php echo "$product_id"; ?></dt>
+                                <td><?php echo "$qty"; ?></dt> 
+                                <td><?php echo "$size"; ?></dt>
+                                <td>
+                                    <?php 
+                                        if($order_status=='pending'){
+                                            echo $order_status='pending';
+                                        }else{
+                                            echo $order_status='Complete'; 
+                                        }                                    
+                                    ?>
+                                </dt>    
                             </tr>
-                            <tr>
-                                <td>1</dt>
-                                <td>brock@gmail.com</dt>
-                                <td>78055</dt>
-                                <td>32</dt>
-                                <td>2</dt> 
-                                <td>Large</dt>
-                                <td>Complete</dt>    
-                            </tr>
-                            <tr>
-                                <td>1</dt>
-                                <td>brock@gmail.com</dt>
-                                <td>78055</dt>
-                                <td>32</dt>
-                                <td>2</dt> 
-                                <td>Large</dt>
-                                <td>Complete</dt>    
-                            </tr>
-                            <tr>
-                                <td>1</dt>
-                                <td>brock@gmail.com</dt>
-                                <td>78055</dt>
-                                <td>32</dt>
-                                <td>2</dt> 
-                                <td>Large</dt>
-                                <td>Complete</dt>    
-                            </tr>
+                            <?php } ?>
                         </btody><!--tbody ends-->
                     </table><!--table table-bordered table-hover table-striped ends-->
                 </div><!--table-responsive ends-->
@@ -182,23 +193,24 @@
         <div class='panel'><!--panel starts-->
             <div class="panel-body"><!--panel-body starts-->
                 <div class="thumb-info mb-md"><!--thumb-info mb-md starts-->
-                    <img src="admin_images/sohail.jpg" class="rounded img-responsive">
+                    <img src="admin_images/<?php echo $admin_image; ?>" class="rounded img-responsive">
                     <div class="thumb-info-title"><!--thumb-info-title starts-->
-                        <span class="thumb-info-inner">Haris Sohail</span>
-                        <span class="thumb-info-type"> Cricket Player</span>
+                        <span class="thumb-info-inner"><?php echo $admin_name; ?></span>
+                        <span class="thumb-info-type"> <?php echo $admin_job; ?></span>
                     </div><!--thumb-info-title ends-->
                 </div><!--thumb-info mb-md ends-->
                 <div class="mb-md"><!--mb-md starts-->
                     <div class="widget-content-expanded"><!--widget-content-expanded starts-->
-                        <i class="fa fa-user"></i><span>Email: </span>sohail@gmail.com <br>
-                        <i class="fa fa-user"></i><span>Country: </span>Pakistan <br>
-                        <i class="fa fa-user"></i><span>Phone: </span>0334678931 <br>
+                        <i class="fa fa-user"></i><span>Email: </span><?php echo $admin_email; ?> <br>
+                        <i class="fa fa-user"></i><span>Country: </span><?php echo $admin_country; ?> <br>
+                        <i class="fa fa-user"></i><span>Phone: </span><?php echo $admin_phone; ?> <br>
                     </div><!--widget-content-expanded ends-->
                     <hr class="dotted short">
                     <h5 class="text-muted">About</h5>
-                    <p>Haris Sohail is a champion Cricket player in Pakistan. He loves winning and wants all of his fans to be winners. If you want to be a winner, you can follow his example and make a habit of winning.</p>
+                    <p><?php echo $admin_about; ?></p>
                 </div><!--mb-md ends-->
             </div><!--panel-body ends-->
         </div><!--panel ends-->
     </div><!--col-md-4 ends-->
 </div><!-- 3 row ends-->
+<?php } ?>

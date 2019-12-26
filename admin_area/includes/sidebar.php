@@ -1,3 +1,9 @@
+<?php
+if(!isset($_SESSION['admin_email'])){
+    echo "<script>window.open('login.php','_self')</script>";
+}else{
+    
+?>
 <nav class="navbar navbar-inverse navbar-fixed-top"><!--navbar navbar-inverse navbar-fixed-top starts-->
     <div class="navbar-header"><!--navbar-header starts-->
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><!--navbar-ex1-collapse starts-->
@@ -12,30 +18,30 @@
         <li class="dropdown"><!--dropdown starts-->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><!--dropdown-toggle starts-->
                 <i class="fa fa-user"></i>
-                Sohail Amed<b class="caret"></b>
+                <?php echo $admin_name; ?><b class="caret"></b>
             </a><!--dropdown-toggle ends-->
             <ul class="dropdown-menu"><!--dropdown menu starts-->
                 <li><!--li starts-->
-                    <a href="index.php?user_profile">
+                    <a href="index.php?user_profile=<?php echo $admin_id; ?>">
                         <i class="fa fa-fw fa-user"></i>Profile
                     </a>
                 </li><!--li ends-->
                  <li><!--li starts-->
                     <a href="index.php?view_products">
                         <i class="fa fa-fw fa-envelope"></i>Products
-                        <span class="badge">7</span>
+                        <span class="badge"><?php $count_products; ?></span>
                     </a>
                 </li><!--li ends-->
                  <li><!--li starts-->
                     <a href="index.php?view_customer">
                         <i class="fa fa-fw fa-gear"></i>Customers
-                        <span class="badge">12</span>
+                        <span class="badge"><?php echo $count_customers; ?></span>
                     </a>
                 </li><!--li ends-->
                  <li><!--li starts-->
                     <a href="index.php?view_cats">
                         <i class="fa fa-fw fa-gear"></i>Product Categories
-                        <span class="badge">5</span>
+                        <span class="badge"><?php echo $count_p_categories; ?></span>
                     </a>
                 </li><!--li ends--> 
                 <li class="divider"></li>
@@ -143,7 +149,7 @@
                     </li>
                 
                     <li>
-                        <a href="index.php?user_profile">
+                        <a href="index.php?user_profile=<?php echo $admin_id; ?>" >
                             <i class="fa fa-fw fa-edit"></i>Edit Profile  </a>                       
                     </li>
                 </ul>             
@@ -161,3 +167,4 @@
     
 </nav><!--navbar navbar-inverse navbar-fixed-top ends-->
 
+<?php } ?>

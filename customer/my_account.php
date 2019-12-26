@@ -81,8 +81,8 @@
             <div class="container"><!---container starts--->
                 <div class="navbar-header"><!---navbar-header starts--->
                     <a class="navbar-brand home" href="index.php"><!---navbar-brand home starts--->
-                        <img src="images/wowdealslogo.png" alt="Wow Deals" class="hidden-xs">
-                        <img src="images/wowdealslogo.png" alt="Wow Deals" class="visible-xs">
+                        <img src="images/allnaturalmedlogo.png" alt="All Natural Medical" class="hidden-xs">
+                        <img src="images/allnaturalmedlogo.png" alt="All Natural Medical" class="visible-xs">
                     </a><!---navbar-brand home ends--->
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
                         <span class="sr-only">Toggle Navigation</span>

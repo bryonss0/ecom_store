@@ -50,18 +50,18 @@
             <div class="col-md-3 col-sm-6"><!-- col-md-3 col-sm-6 starts -->
                 <h4><Where to find us</h4>
                 <p><!-- p starts -->
-                    <strong> Wow Deals LLC </strong>
-                    <br>5000 Lake Dr
-                    <br>Fort Worth, TX
-                    <br>wow.deals@gmail.com                    
+                    <strong> All Natural Medical </strong>
+                    <br>747 Hurley Rd
+                    <br>Sneedville, TN
+                    <br>allnaturalmed@gmail.com                    
                 </p><!-- p ends  -->
                 <a href="contact.php">How to Contact Us</a>
                 <hr class="hidden-md hidden-lg">
             </div><!-- col-md-3 col-sm-6 ends -->
             <div class="col-md-3 col-sm-6"><!-- col-md-3 col-sm-6 starts -->
-                <h4>Shopping in the News</h4>
+                <h4>Natural medicine in the News</h4>
                 <p class="text-muted">
-                    Target wrests apparel from department stores
+                    Natural medicine from endangered trees cures cancer, so they make it in a lab.
                 </p>
                 <form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri=computerfever', 'popupwindow', 'scrollbars=yes,width=550, height=520'); return true"><!-- form starts -->
                     <div class="input-group"><!--input-group starts -->

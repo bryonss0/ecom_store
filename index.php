@@ -163,7 +163,7 @@
                 }                
                 ?>
                 <?php
-                $get_slides = "select * from slider LIMIT 1,13 ";
+                $get_slides = "select * from slider LIMIT 1,12 ";
                 $run_slides = mysqli_query($con, $get_slides);
                 while($row_slides = mysqli_fetch_array($run_slides)){
                     $slide_name = $row_slides['slide_name'];

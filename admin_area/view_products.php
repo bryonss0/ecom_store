@@ -70,12 +70,14 @@ if(!isset($_SESSION['admin_email'])){
                                 <td><?php echo $pro_keywords; ?></td>
                                 <td><?php echo $pro_date; ?></td>
                                 <td>
-                                    <a href="index.php?delete_product=<?php echo $pro_id; ?>"></a>
-                                    <i class="fa fa-trash-o"></i>Delete
+                                    <a href="index.php?delete_product=<?php echo $pro_id; ?>">
+                                    <i class="fa fa-trash-o"></i> Delete
+                                    </a>
                                 </td>
                                 <td>
-                                    <a href="index.php?edit_product=<?php echo $pro_id; ?>"></a>
-                                    <i class="fa fa-pencil"></i>Edit
+                                    <a href="index.php?edit_product=<?php echo $pro_id; ?>">
+                                    <i class="fa fa-pencil"></i> Edit
+                                    </a>
                                 </td>
                             </tr>
                             <?php } ?>

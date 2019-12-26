@@ -48,10 +48,10 @@
             <div class="col-md-3 col-sm-6"><!-- col-md-3 col-sm-6 starts -->
                 <h4><Where to find us</h4>
                 <p><!-- p starts -->
-                    <strong> Wow Deals LLC </strong>
-                    <br>5000 Lake Dr
-                    <br>Fort Worth, TX
-                    <br>wow.deals@gmail.com                    
+                    <strong> All Natural Medical </strong>
+                    <br>774 Hurley Rd
+                    <br>Sneedville, TN
+                    <br>allnaturalmed@gmail.com                    
                 </p><!-- p ends  -->
                 <a href="../contact.php">Go to Contact Us page</a>
                 <hr class="hidden-md hidden-lg">
