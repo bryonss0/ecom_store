@@ -68,6 +68,39 @@ $count_pending_orders = mysqli_num_rows($run_pending_orders);
                     if(isset($_GET['edit_product'])){
                         include("edit_product.php");
                     }
+                    if(isset($_GET['insert_p_cat'])){
+                        include("insert_p_cat.php");
+                    }
+                    if(isset($_GET['view_p_cats'])){
+                        include("view_p_cats.php");
+                    }
+                    if(isset($_GET['delete_p_cat'])){
+                        include("delete_p_cat.php");
+                    }
+                    if(isset($_GET['edit_p_cat'])){
+                        include("edit_p_cat.php");
+                    }
+                    if(isset($_GET['insert_cat'])){
+                        include("insert_cat.php");
+                    }
+                    if(isset($_GET['view_cats'])){
+                        include("view_cats.php");
+                    }
+                    if(isset($_GET['delete_cat'])){
+                        include("delete_cat.php");
+                    }
+                    if(isset($_GET['edit_cat'])){
+                        include("edit_cat.php");
+                    }
+                    if(isset($_GET['insert_slide'])){
+                        include("insert_slide.php");
+                    }
+                    if(isset($_GET['view_slides'])){
+                        include("view_slides.php");
+                    }
+                    if(isset($_GET['delete_slide'])){
+                        include("delete_slide.php");
+                    }
                     ?>
                 </div><!--container-fluid ends-->
             </div><!--page-wrapper ends-->
