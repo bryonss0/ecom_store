@@ -79,8 +79,8 @@
             <div class="container"><!---container starts--->
                 <div class="navbar-header"><!---navbar-header starts--->
                     <a class="navbar-brand home" href="index.php"><!---navbar-brand home starts--->
-                        <img src="images/allnaturalmedlogo.png" alt="All Natural Medical" class="hidden-xs">
-                        <img src="images/allnaturalmedlogo.png" alt="All Natural Medical" class="visible-xs">
+                        <img src="images/allnaturalmed.png" alt="All Natural Med" class="hidden-xs" width="150">
+                        <img src="images/allnaturalmed.png" alt="All Natural Med" class="visible-xs" width="150">
                     </a><!---navbar-brand home ends--->
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
                         <span class="sr-only">Toggle Navigation</span>
@@ -144,7 +144,7 @@
         </div><!---navbar navbar-default ends--->
         
         <!-- image carousel  start-->     
-        <div class="container">  
+        <div class="container" id="slider">  <!--container starts-->
           <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
             <!-- Wrapper for slides -->
@@ -189,7 +189,7 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
-        </div>
+        </div><!--container ends-->
         <!-- image carousel ends  -->
 
         <div id="advantages"><!-- advantages starts -->
